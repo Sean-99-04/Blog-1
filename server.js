@@ -4,11 +4,11 @@ const exphbs = require("express-handlebars");
 const routes = require("./routes/routes");
 const mongoose = require("mongoose");
 
-// Development
+// DEVELOPMENT
 const URI =
   "mongodb+srv://Sean:m0ngoPass@cluster0.xuroh.mongodb.net/Cats?retryWrites=true&w=majority";
 
-// Production
+// PRODUCTION
 // const URI =
 //   "mongodb+srv://Sean:" +
 //   process.env.MONGODB_PASS +
