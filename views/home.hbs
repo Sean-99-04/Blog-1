@@ -1,0 +1,20 @@
+<p>Hello there, this is the home.hbs page</p>
+
+<form action="/routes/home" method="POST">
+    <label for="author">Author: </label>
+    <input type="text" name="author" value="Sean" required="true">
+
+    <label for="title">Title: </label>
+    <input type="text" name="title" value="The Roman Empire: Part 1" required="true">
+    
+    <label for="content">Content: </label>
+    <textarea name="content" id="" cols="30" rows="10" value="" required="true">This is content for "The Roman Empire: Part 1".
+    </textarea>
+    <label for="source">Source: </label>
+    <input type="text" name="source" value="A book I read" required="true">
+    
+    <label for="tags">Tags: </label>
+    <input type="text" name="tags" value="romans, history" required="true">
+
+    <input type="submit" value="Submit" required="true">
+</form>
