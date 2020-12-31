@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const articleSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   author: String,
   title: String,
   content: String,
@@ -9,4 +10,4 @@ const articleSchema = new mongoose.Schema({
   tags: String,
 });
 
-module.exports = mongoose.model("Article", articleSchema);
+module.exports = mongoose.model("Article", articleSchema, "articles");

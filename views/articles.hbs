@@ -1,0 +1,15 @@
+<a href="/routes/newArticle" id="newArticle">Create New Article</a>
+
+<ul>
+    {{#each articles}}
+        <li>{{this.author}}
+            <ul>
+                <li>{{this.title}}</li>
+                <li>{{this.content}}</li>
+                <li>{{this.postedAt}}</li>
+                <li>{{this.source}}</li>
+                <li>{{this.tags}}</li>
+            </ul>
+        </li>
+    {{/each}}
+</ul>

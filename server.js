@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 // DEVELOPMENT
 const URI =
-  "mongodb+srv://Sean:m0ngoPass@cluster0.xuroh.mongodb.net/Cats?retryWrites=true&w=majority";
+  "mongodb+srv://Sean:m0ngoPass@cluster0.xuroh.mongodb.net/Articles?retryWrites=true&w=majority";
 
 // PRODUCTION
 // const URI =
@@ -14,10 +14,16 @@ const URI =
 //   process.env.MONGODB_PASS +
 //   "@cluster0.xuroh.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const conn = mongoose.connect(URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.engine(".hbs", exphbs({ extname: ".hbs" }));
-app.set("view engine", ".hbs");
 app.set("view engine", ".hbs");
 
 app.use(express.urlencoded({ extended: true }));

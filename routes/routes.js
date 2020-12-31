@@ -2,17 +2,37 @@ const express = require("express");
 const router = express.Router();
 const Article = require("./../models/models");
 const formatDate = require("./../api/dateFormatting");
+const mongoose = require("mongoose");
 
 router.get("/", (req, res) => {
-  res.send("Router Page");
+  Article.find({})
+    .exec()
+    .then((oldArticleObj) => {
+      const newArticleObj = {
+        articles: oldArticleObj.map((data) => {
+          return {
+            author: data.author,
+            title: data.title,
+            content: data.content,
+            postedAt: formatDate(data.postedAt),
+            source: data.source,
+            tags: data.tags,
+          };
+        }),
+      };
+
+      res.render("articles", { articles: newArticleObj.articles });
+    })
+    .catch((err) => console.log(err));
 });
 
-router.get("/home", (req, res) => {
-  res.render("home");
+router.get("/newArticle", (req, res) => {
+  res.render("newArticle");
 });
 
-router.post("/home", (req, res) => {
+router.post("/newArticle", (req, res) => {
   const article = new Article({
+    _id: new mongoose.Types.ObjectId(),
     author: req.body.author,
     title: req.body.title,
     content: req.body.content,
@@ -28,16 +48,27 @@ router.post("/home", (req, res) => {
   //     .catch((err) => console.log(err));
 
   // DEVELOPMENT
-  console.log(article);
+  //   console.log(article);
 
-  res.render("home", {
-    author: article.author,
-    title: article.title,
-    content: article.content,
-    postedAt: formatDate(article.postedAt),
-    source: article.source,
-    tags: article.tags,
-  });
+  Article.find({})
+    .exec()
+    .then((oldArticleObj) => {
+      const newArticleObj = {
+        articles: oldArticleObj.map((data) => {
+          return {
+            author: data.author,
+            title: data.title,
+            content: data.content,
+            postedAt: formatDate(data.postedAt),
+            source: data.source,
+            tags: data.tags,
+          };
+        }),
+      };
+
+      res.render("articles", { articles: newArticleObj.articles });
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

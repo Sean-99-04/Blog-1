@@ -51,18 +51,29 @@ const month = (month) => {
   return monthObj[month.getMonth()];
 };
 
+const addZero = (time) => {
+  if (time < 10) {
+    time = `0${time.toString()}`;
+  }
+  return time;
+};
+
 const minutes = (minutes) => {
   minutes = minutes.getMinutes();
-  if (minutes.toString().length === 1) {
-    minutes = `0${minutes}`;
-    return minutes;
-  }
+  const min = addZero(minutes);
+  return min;
+};
+
+const hours = (hours) => {
+  hours = hours.getHours();
+  const h = addZero(hours);
+  return h;
 };
 
 const formatDate = (date) => {
   return `${weekDay(date)}, ${monthDay(date)} ${month(
     date
-  )}, ${date.getFullYear()} at ${date.getHours()}:${minutes(date)}`;
+  )}, ${date.getFullYear()} at ${hours(date)}:${minutes(date)}`;
 };
 
 module.exports = formatDate;
